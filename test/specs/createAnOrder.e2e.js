@@ -101,6 +101,7 @@ describe('Create an order', () => {
         await page.blanketsReq();
         await page.addTwoIceCreams();
         await page.displayCarSearch();
+        // eslint-disable-next-line wdio/no-pause
         await browser.pause(4000);
         const carPlateNumber = await $(page.carPlateNumber);
         await carPlateNumber.waitForDisplayed;

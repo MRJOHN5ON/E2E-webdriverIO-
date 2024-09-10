@@ -155,6 +155,7 @@ module.exports = {
         //clicks the slider to require blankets and hankerchiefs
         const blanketsButton = await $(this.reqSlider)
         await blanketsButton.click()
+        // eslint-disable-next-line wdio/no-pause
         await browser.pause(5000);
         //validates the slider has been moved
         const isChecked = await $(this.reqSliderChecked);
