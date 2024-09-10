@@ -6,6 +6,7 @@ describe('Create an order', () => {
     it('should fill in the addresses for route', async () => {
         await browser.url(`/`)
         await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
+        // note to reviewer: expect added to function - see page.js
 
     }),
 
