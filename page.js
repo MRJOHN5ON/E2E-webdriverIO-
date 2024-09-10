@@ -27,7 +27,7 @@ module.exports = {
     iceCreamValue: '.counter-value',
     orderButton: '.smart-button',
     carPlateNumber: '.order-number',
-    
+
     // Modals
     phoneNumberModal: '.modal',
     paymentModal: '//*[@id="root"]/div/div[2]/div[2]/div[1]',
@@ -149,8 +149,7 @@ module.exports = {
         if (!hasOpenClass) {
             // Click the arrow to open it if it's not already open
             await arrowElement.click();
-        };
-    
+        }
     },
     blanketsReq: async function () {
         //clicks the slider to require blankets and hankerchiefs
