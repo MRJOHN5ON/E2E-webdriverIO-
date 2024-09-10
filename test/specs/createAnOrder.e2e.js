@@ -2,6 +2,7 @@ const page = require('../../page');
 const helper = require('../../helper')
 
 describe('Create an order', () => {
+
     it('should open phone number modal', async () => {
         await browser.url(`/`)
         await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
@@ -33,6 +34,7 @@ describe('Create an order', () => {
         await page.submitPhoneNumber(phoneNumber);
         await expect(await helper.getElementByText(phoneNumber)).toBeExisting();
         await page.addCard();
+        await expect(await $(`${page.paymentCard}`)).toBeExisting();
     })
 
     it('should message the driver', async () => {
@@ -42,7 +44,10 @@ describe('Create an order', () => {
         await page.submitPhoneNumber(phoneNumber);
         await expect(await helper.getElementByText(phoneNumber)).toBeExisting();
         await page.addCard();
+        await expect(await $(`${page.paymentCard}`)).toBeExisting();
         await page.addMessageForDriver();
+        const messageDriverField = await $(page.messageDriverField);
+        await expect(await messageDriverField.getValue()).toEqual('Honk when you are here');
     
     })
 
@@ -53,9 +58,13 @@ describe('Create an order', () => {
         await page.submitPhoneNumber(phoneNumber);
         await expect(await helper.getElementByText(phoneNumber)).toBeExisting();
         await page.addCard();
+        await expect(await $(`${page.paymentCard}`)).toBeExisting();
         await page.addMessageForDriver()
+        const messageDriverField = await $(page.messageDriverField);
+        await expect(await messageDriverField.getValue()).toEqual('Honk when you are here');
         await page.ensureArrowIsOpen();
         await page.blanketsReq();
+        //TO REVIEWER: expect is already written into the function itself
 
     
     })
@@ -67,11 +76,15 @@ describe('Create an order', () => {
         await page.submitPhoneNumber(phoneNumber);
         await expect(await helper.getElementByText(phoneNumber)).toBeExisting();
         await page.addCard();
+        await expect(await $(`${page.paymentCard}`)).toBeExisting();
         await page.addMessageForDriver()
+        const messageDriverField = await $(page.messageDriverField);
+        await expect(await messageDriverField.getValue()).toEqual('Honk when you are here');
+        await page.ensureArrowIsOpen();
         await page.ensureArrowIsOpen();
         await page.blanketsReq();
         await page.addTwoIceCreams();
-
+        //TO REVIEWER: expect is already written into the function itself
     
     })
     it('should show car search modal', async () => {
@@ -81,12 +94,15 @@ describe('Create an order', () => {
         await page.submitPhoneNumber(phoneNumber);
         await expect(await helper.getElementByText(phoneNumber)).toBeExisting();
         await page.addCard();
+        await expect(await $(`${page.paymentCard}`)).toBeExisting();
         await page.addMessageForDriver()
+        const messageDriverField = await $(page.messageDriverField);
+        await expect(await messageDriverField.getValue()).toEqual('Honk when you are here');
         await page.ensureArrowIsOpen();
         await page.blanketsReq();
         await page.addTwoIceCreams();
         await page.displayCarSearch();
-
+        //TO REVIEWER: expect is already written into the function itself
     })
 
     it('should driver details after car is found', async () =>{
@@ -96,15 +112,17 @@ describe('Create an order', () => {
         await page.submitPhoneNumber(phoneNumber);
         await expect(await helper.getElementByText(phoneNumber)).toBeExisting();
         await page.addCard();
+        await expect(await $(`${page.paymentCard}`)).toBeExisting();
         await page.addMessageForDriver()
+        const messageDriverField = await $(page.messageDriverField);
+        await expect(await messageDriverField.getValue()).toEqual('Honk when you are here');
         await page.ensureArrowIsOpen();
         await page.blanketsReq();
         await page.addTwoIceCreams();
         await page.displayCarSearch();
-        // eslint-disable-next-line wdio/no-pause
-        await browser.pause(4000);
+        await browser.pause(41000);
         const carPlateNumber = await $(page.carPlateNumber);
-        await carPlateNumber.waitForDisplayed;
+        await expect(carPlateNumber).toBeExisting();
 
     })
     

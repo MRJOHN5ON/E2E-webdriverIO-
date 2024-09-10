@@ -27,6 +27,7 @@ module.exports = {
     iceCreamValue: '.counter-value',
     orderButton: '.smart-button',
     carPlateNumber: '.order-number',
+    paymentCard: 'div=Card',
 
     // Modals
     phoneNumberModal: '.modal',
@@ -174,7 +175,7 @@ module.exports = {
         await expect(text).toBe('2');
         //validates that the + button is disabled, which also validates that you cant add more than 2
         const disabledPlusBt = await $(this.disabledPlusBt)
-        await disabledPlusBt.toBeExisting
+        await disabledPlusBt.tobeDisabled
     },
 
     displayCarSearch: async function () {
