@@ -1,138 +1,123 @@
-const page = require('../../page');
-const helper = require('../../helper')
+import { selectors, actions } from '../../page.js';
 
 describe('Create an order', () => {
+    beforeEach(async () => {
+        await browser.url(`/`);
+    });
 
     it('should fill in the addresses for route', async () => {
-        await browser.url(`/`)
-        await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
-        // note to reviewer: expect added to function - see page.js
-
-    }),
+        await actions.fillAddresses('East 2nd Street, 601', '1300 1st St');
+    });
 
     it('should open phone number modal', async () => {
-        await browser.url(`/`)
-        await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
-        const phoneNumberButton = await $(page.phoneNumberButton);
+        await actions.fillAddresses('East 2nd Street, 601', '1300 1st St');
+        const phoneNumberButton = await $(selectors.phoneNumberButton);
         await phoneNumberButton.waitForDisplayed();
         await phoneNumberButton.click();
-        const phoneNumberModal = await $(page.phoneNumberModal);
+        const phoneNumberModal = await $(selectors.phoneNumberModal);
         await expect(phoneNumberModal).toBeExisting();
-    })
+    });
+
     it("should select supportive plan ", async () => {
-        await browser.url(`/`);
-        await page.fillAddresses("East 2nd Street, 601", "1300 1st St");
-        await page.selectSupportive();
-        await expect ($(page.supportivePlanButton).parentElement()).toHaveElementClass("active");
-    })
+        await actions.fillAddresses("East 2nd Street, 601", "1300 1st St");
+        await actions.selectSupportive();
+        await expect($(selectors.supportivePlanButton).parentElement()).toHaveElementClass("active");
+    });
 
     it('should save the phone', async () => {
-        await browser.url(`/`)
-        await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
-        const phoneNumber = helper.getPhoneNumber("+1");
-        await page.submitPhoneNumber(phoneNumber);
-        await expect(await helper.getElementByText(phoneNumber)).toBeExisting();
-    })
+        await actions.fillAddresses('East 2nd Street, 601', '1300 1st St');
+        const phoneNumber = actions.getPhoneNumber("+1");
+        await actions.submitPhoneNumber(phoneNumber);
+        await expect(await actions.getElementByText(phoneNumber)).toBeExisting();
+    });
 
     it('should save the credit card', async () => {
-        await browser.url(`/`);
-        await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
-        const phoneNumber = helper.getPhoneNumber("+1");
-        await page.submitPhoneNumber(phoneNumber);
-        await expect(await helper.getElementByText(phoneNumber)).toBeExisting();
-        await page.addCard();
-        await expect(await $(`${page.paymentCard}`)).toBeExisting();
-    })
+        await actions.fillAddresses('East 2nd Street, 601', '1300 1st St');
+        const phoneNumber = actions.getPhoneNumber("+1");
+        await actions.submitPhoneNumber(phoneNumber);
+        await expect(await actions.getElementByText(phoneNumber)).toBeExisting();
+        await actions.addCard();
+        await expect(await $(`${selectors.paymentCard}`)).toBeExisting();
+    });
 
     it('should message the driver', async () => {
-        await browser.url(`/`);
-        await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
-        const phoneNumber = helper.getPhoneNumber("+1");
-        await page.submitPhoneNumber(phoneNumber);
-        await expect(await helper.getElementByText(phoneNumber)).toBeExisting();
-        await page.addCard();
-        await expect(await $(`${page.paymentCard}`)).toBeExisting();
-        await page.addMessageForDriver();
-        const messageDriverField = await $(page.messageDriverField);
+        await actions.fillAddresses('East 2nd Street, 601', '1300 1st St');
+        const phoneNumber = actions.getPhoneNumber("+1");
+        await actions.submitPhoneNumber(phoneNumber);
+        await expect(await actions.getElementByText(phoneNumber)).toBeExisting();
+        await actions.addCard();
+        await expect(await $(`${selectors.paymentCard}`)).toBeExisting();
+        await actions.addMessageForDriver();
+        const messageDriverField = await $(selectors.messageDriverField);
         await expect(await messageDriverField.getValue()).toEqual('Honk when you are here');
-    
-    })
+
+    });
 
     it('should add blanket and handkerchiefs', async () => {
-        await browser.url(`/`);
-        await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
-        const phoneNumber = helper.getPhoneNumber("+1");
-        await page.submitPhoneNumber(phoneNumber);
-        await expect(await helper.getElementByText(phoneNumber)).toBeExisting();
-        await page.addCard();
-        await expect(await $(`${page.paymentCard}`)).toBeExisting();
-        await page.addMessageForDriver()
-        const messageDriverField = await $(page.messageDriverField);
+        await actions.fillAddresses('East 2nd Street, 601', '1300 1st St');
+        const phoneNumber = actions.getPhoneNumber("+1");
+        await actions.submitPhoneNumber(phoneNumber);
+        await expect(await actions.getElementByText(phoneNumber)).toBeExisting();
+        await actions.addCard();
+        await expect(await $(`${selectors.paymentCard}`)).toBeExisting();
+        await actions.addMessageForDriver()
+        const messageDriverField = await $(selectors.messageDriverField);
         await expect(await messageDriverField.getValue()).toEqual('Honk when you are here');
-        await page.ensureArrowIsOpen();
-        await page.blanketsReq();
-        //TO REVIEWER: expect is already written into the function itself
-
-    
-    })
+        await actions.ensureArrowIsOpen();
+        await actions.blanketsReq();
+    });
 
     it('should add 2 ice creams', async () => {
-        await browser.url(`/`);
-        await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
-        const phoneNumber = helper.getPhoneNumber("+1");
-        await page.submitPhoneNumber(phoneNumber);
-        await expect(await helper.getElementByText(phoneNumber)).toBeExisting();
-        await page.addCard();
-        await expect(await $(`${page.paymentCard}`)).toBeExisting();
-        await page.addMessageForDriver()
-        const messageDriverField = await $(page.messageDriverField);
+        await actions.fillAddresses('East 2nd Street, 601', '1300 1st St');
+        const phoneNumber = actions.getPhoneNumber("+1");
+        await actions.submitPhoneNumber(phoneNumber);
+        await expect(await actions.getElementByText(phoneNumber)).toBeExisting();
+        await actions.addCard();
+        await expect(await $(`${selectors.paymentCard}`)).toBeExisting();
+        await actions.addMessageForDriver()
+        const messageDriverField = await $(selectors.messageDriverField);
         await expect(await messageDriverField.getValue()).toEqual('Honk when you are here');
-        await page.ensureArrowIsOpen();
-        await page.ensureArrowIsOpen();
-        await page.blanketsReq();
-        await page.addTwoIceCreams();
-        //TO REVIEWER: expect is already written into the function itself
-    
-    })
+        await actions.ensureArrowIsOpen();
+        await actions.ensureArrowIsOpen();
+        await actions.blanketsReq();
+        await actions.addTwoIceCreams();
+    });
+
     it('should show car search modal', async () => {
-        await browser.url(`/`);
-        await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
-        const phoneNumber = helper.getPhoneNumber("+1");
-        await page.submitPhoneNumber(phoneNumber);
-        await expect(await helper.getElementByText(phoneNumber)).toBeExisting();
-        await page.addCard();
-        await expect(await $(`${page.paymentCard}`)).toBeExisting();
-        await page.addMessageForDriver()
-        const messageDriverField = await $(page.messageDriverField);
+        await actions.fillAddresses('East 2nd Street, 601', '1300 1st St');
+        const phoneNumber = actions.getPhoneNumber("+1");
+        await actions.submitPhoneNumber(phoneNumber);
+        await expect(await actions.getElementByText(phoneNumber)).toBeExisting();
+        await actions.addCard();
+        await expect(await $(`${selectors.paymentCard}`)).toBeExisting();
+        await actions.addMessageForDriver()
+        const messageDriverField = await $(selectors.messageDriverField);
         await expect(await messageDriverField.getValue()).toEqual('Honk when you are here');
-        await page.ensureArrowIsOpen();
-        await page.blanketsReq();
-        await page.addTwoIceCreams();
-        await page.displayCarSearch();
-        //TO REVIEWER: expect is already written into the function itself
-    })
+        await actions.ensureArrowIsOpen();
+        await actions.blanketsReq();
+        await actions.addTwoIceCreams();
+        await actions.displayCarSearch();
+    });
 
-    it('should driver details after car is found', async () =>{
-        await browser.url(`/`);
-        await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
-        const phoneNumber = helper.getPhoneNumber("+1");
-        await page.submitPhoneNumber(phoneNumber);
-        await expect(await helper.getElementByText(phoneNumber)).toBeExisting();
-        await page.addCard();
-        await expect(await $(`${page.paymentCard}`)).toBeExisting();
-        await page.addMessageForDriver()
-        const messageDriverField = await $(page.messageDriverField);
+    it('should driver details after car is found', async () => {
+        await actions.fillAddresses('East 2nd Street, 601', '1300 1st St');
+        const phoneNumber = actions.getPhoneNumber("+1");
+        await actions.submitPhoneNumber(phoneNumber);
+        await expect(await actions.getElementByText(phoneNumber)).toBeExisting();
+        await actions.addCard();
+        await expect(await $(`${selectors.paymentCard}`)).toBeExisting();
+        await actions.addMessageForDriver()
+        const messageDriverField = await $(selectors.messageDriverField);
         await expect(await messageDriverField.getValue()).toEqual('Honk when you are here');
-        await page.ensureArrowIsOpen();
-        await page.blanketsReq();
-        await page.addTwoIceCreams();
-        await page.displayCarSearch();
+        await actions.ensureArrowIsOpen();
+        await actions.blanketsReq();
+        await actions.addTwoIceCreams();
+        await actions.displayCarSearch();
         await browser.pause(41000);
-        const carPlateNumber = await $(page.carPlateNumber);
+        const carPlateNumber = await $(selectors.carPlateNumber);
         await expect(carPlateNumber).toBeExisting();
+    });
 
-    })
-    
-})
+});
 
 

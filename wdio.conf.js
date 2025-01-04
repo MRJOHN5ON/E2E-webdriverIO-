@@ -1,4 +1,4 @@
-exports.config = {
+export const config = {
     runner: 'local',
     specs: [
         './test/specs/**/*.js'
@@ -28,7 +28,7 @@ exports.config = {
 ],
     logLevel: 'error',
     bail: 0,
-    baseUrl: 'https://cnt-3f200504-c31f-4de7-95d5-bf23569eeb62.containerhub.tripleten-services.com',
+    baseUrl: 'https://cnt-d9b57d8d-88fc-4807-81e2-a76f01d06166.containerhub.tripleten-services.com',
     waitforTimeout: 10000,
     connectionRetryTimeout: 120000,
     connectionRetryCount: 3,
