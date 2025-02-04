@@ -2,7 +2,7 @@
 
 ## Project Description
 ![screenshot](urbanroutes.png)
-This project is designed to perform end-to-end (E2E) testing for the Urban Routes web application, similar to ride-booking services like Uber. This is ran off a private server provided by TripleTen for testing educational purposes. It automates the testing of various functionalities such as entering addresses, adding randomized phone numbers, selecting different options, saving credit card information, and messaging drivers.
+This project is designed to perform end-to-end (E2E) testing for the Urban Routes web application, similar to ride-booking services like Uber. This is ran off a private server provided by TripleTen for testing educational purposes. It automates the testing of various functionalities such as entering addresses, adding randomized phone numbers, selecting different options, saving credit card information, and messaging drivers.ewhfoiwhvoiwrnvoiwrnvwv
 
 ## Technologies Used ##
 - **Javascript**
